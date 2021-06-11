@@ -3,8 +3,11 @@
 This repository contains buildable versions of the example source files in the
 Intel Optimization Manual available here
 (https://software.intel.com/en-us/articles/intel-sdm).  Assembly source code
-is provided for GCC, Clang and MSVC, using the Intel syntax.  Unit tests are
-also provided for each of the samples.
+is provided for GCC, Clang, MSVC, and Intel compilers (icx), using the Intel syntax.
+Unit tests are also provided for each of the samples.
+
+Please note the need for up-to-date compilers... please check your compiler versions
+if you get errors during builds.
 
 ## Building on Linux
 
@@ -16,10 +19,13 @@ To run the unit tests
 4. cmake ..
 5. make && make test
 
-GCC 8.1 or higher is required to build the unit tests.  The unit tests are
-compiled with --march=haswell and so a Haswell CPU or later is required to run
-them.  Tests that execute instructions not present on Haswell will be
-skipped if the CPU on which they are run does not support those instructions.
+GCC 8.1 or higher is required to build the unit tests.
+Clang 10.0 or higher is required to build the unit tests.
+
+The unit tests are compiled with --march=haswell and so a Haswell CPU (c. 2013)
+or later is required to run them.  Tests that execute instructions not present
+n Haswell will be skipped if the CPU on which they are run does not support
+those instructions.
 
 The code samples can also be compiled with clang:
 
@@ -27,6 +33,24 @@ The code samples can also be compiled with clang:
 2. mkdir clang-build
 3. cd clang-build
 4. CC=clang CXX=clang++ cmake ..
+5. make && make test
+
+
+The code samples can also be compiled with Intel compilers (LLVM based):
+
+1. cd to the root folder of this project
+2. mkdir icx-build
+3. cd icx-build
+4. CC=icx CXX=icx cmake ..
+5. make && make test
+
+
+The code samples can also be compiled with DPC++ compilers (LLVM based):
+
+1. cd to the root folder of this project
+2. mkdir dpcpp-build
+3. cd dpcpp-build
+4. CC=clang CXX=dpcpp cmake ..
 5. make && make test
 
 
